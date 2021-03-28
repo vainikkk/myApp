@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 const HomeScreen = ({ navigation }) => {
   const { employeesData } = useSelector((state) => state);
-
+  console.log(employeesData)
   return (
     <View style={styles.container}>
       <FlatList

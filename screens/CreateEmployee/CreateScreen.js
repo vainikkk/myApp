@@ -84,7 +84,10 @@ const CreateScreen = ({ params, navigation, route }) => {
       body: formData,
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        setModalVisible(false)
+        console.log(data)
+      })
       .catch((err) => console.log(err));
   };
 
@@ -130,14 +133,16 @@ const CreateScreen = ({ params, navigation, route }) => {
   };
 
   const handleUpdate = () => {
+    let error = {};
     if (name && designation && email && number) {
       let empData = {
         name,
         designation,
         email,
         number,
+        id:getId,
       };
-      dispatch({ type: "UPDATE_EMPLOYEE", payload: { empData, id: getId } });
+      dispatch({ type: "UPDATE_EMPLOYEE", payload: { empData, id:getId} });
       navigation.navigate("Profile");
     } else {
       if (!name) error.name = true;
@@ -169,7 +174,7 @@ const CreateScreen = ({ params, navigation, route }) => {
           style={styles.inputStyle}
           label="Designation"
           theme={{
-            colors: { primary: MY_COLORS.primary, underlineColor: "transparent" },
+            colors: { primary: errors.designation ? MY_COLORS.primaryRed : MY_COLORS.primary, underlineColor: "transparent" },
           }}
           value={designation}
           onChangeText={(text) => handleChange(text, "DESIGNATION")}
@@ -183,7 +188,7 @@ const CreateScreen = ({ params, navigation, route }) => {
           label="Email"
           autoCompleteType="email"
           theme={{
-            colors: { primary: MY_COLORS.primary, underlineColor: "transparent" },
+            colors: { primary: errors.email ? MY_COLORS.primaryRed : MY_COLORS.primary, underlineColor: "transparent" },
           }}
           value={email}
           onChangeText={(text) => handleChange(text, "EMAIL")}
@@ -198,7 +203,7 @@ const CreateScreen = ({ params, navigation, route }) => {
           autoCompleteType="tel"
           keyboardType="number-pad"
           theme={{
-            colors: { primary: MY_COLORS.primary, underlineColor: "transparent" },
+            colors: { primary: errors.number ? MY_COLORS.primaryRed : MY_COLORS.primary, underlineColor: "transparent" },
           }}
           value={number}
           onChangeText={(text) => handleChange(text, "NUMBER")}

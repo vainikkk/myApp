@@ -25,7 +25,7 @@ const ProfileScreen = ({ params, route }) => {
     navigaiton.navigate("Create Screen", { id: employeeId });
   };
 
-  let employee = employeesData.length > 0 && employeesData.find((v) => v.id === employeeId);
+  let employee = Array.isArray(employeesData) && employeesData?.find((v) => v.id === employeeId);
 
   return (
     <View style={styles.container}>

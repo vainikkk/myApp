@@ -15,13 +15,13 @@ export const reducre = (state = initialState, action) => {
     case "ADD_EMPLOYEE":
       let addedData = state.employeesData;
       let employee = action.payload;
-      employee.id = addedData.length + 1 + "ID";
+      employee.id = Math.random() + addedData.length + "ID";
       addedData.push(employee);
       return { ...state, employeesData: addedData };
 
     case "UPDATE_EMPLOYEE":
       let removedData = state.employeesData.filter((v) => v.id !== action.payload.id);
-      removedData.push({ ...action.payload.empData, id: action.payload.id });
+      removedData.push({ ...action.payload.empData});
       return { ...state, employeesData: removedData };
 
     case "DELETE_EMPLOYEE":
