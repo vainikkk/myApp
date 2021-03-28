@@ -23,3 +23,4 @@ This app is Employee management system
 our application provide Add Employee,Edit employee and fire employee 
 Display all employee in home page 
 
+![Screenshot](./assets/images/ss1.jpg)
